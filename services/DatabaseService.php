@@ -91,17 +91,17 @@ class DatabaseService
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$pdo->setAttribute(\PDO::ATTR_ORACLE_NULLS, \PDO::NULL_EMPTY_STRING);
 
-			$pdo->sqliteCreateFunction('regexp', function ($pattern, $value)
-			{
-				mb_regex_encoding('UTF-8');
-				return (false !== mb_ereg($pattern, $value)) ? 1 : 0;
-			});
-
-			$pdo->sqliteCreateFunction('grocy_user_setting', function ($value)
-			{
-				$usersService = new UsersService();
-				return $usersService->GetUserSetting(GROCY_USER_ID, $value);
-			});
+//			$pdo->sqliteCreateFunction('regexp', function ($pattern, $value)
+//			{
+//				mb_regex_encoding('UTF-8');
+//				return (false !== mb_ereg($pattern, $value)) ? 1 : 0;
+//			});
+//
+//			$pdo->sqliteCreateFunction('grocy_user_setting', function ($value)
+//			{
+//				$usersService = new UsersService();
+//				return $usersService->GetUserSetting(GROCY_USER_ID, $value);
+//			});
 
 			self::$DbConnectionRaw = $pdo;
 		}
