@@ -58,7 +58,7 @@ class DatabaseService
 
 	public function GetDbChangedTime()
 	{
-		return date('Y-m-d H:i:s', filemtime($this->GetDbFilePath()));
+		return date('Y-m-d H:i:s', time());
 	}
 
 	public function GetDbConnection()
@@ -87,7 +87,7 @@ class DatabaseService
 	{
 		if (self::$DbConnectionRaw == null)
 		{
-			$pdo = new \PDO('sqlite:' . $this->GetDbFilePath());
+			$pdo = new \PDO('pgsql:host=10.0.0.2;port=9875;dbname=grocy_test;user=grocy;password=grocy');
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$pdo->setAttribute(\PDO::ATTR_ORACLE_NULLS, \PDO::NULL_EMPTY_STRING);
 
@@ -111,7 +111,7 @@ class DatabaseService
 
 	public function SetDbChangedTime($dateTime)
 	{
-		touch($this->GetDbFilePath(), strtotime($dateTime));
+//		touch($this->GetDbFilePath(), strtotime($dateTime));
 	}
 
 	public static function getInstance()
